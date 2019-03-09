@@ -1,6 +1,6 @@
 package model.data_structures;
 
-public interface IStack<T> extends Iterable<T>{
+public interface IStack<T> extends Iterable<T>, Comparable<T>{
 	
 	/**
 	 * Retorna true si la Pila esta vacia
@@ -25,4 +25,11 @@ public interface IStack<T> extends Iterable<T>{
 	 * @return el elemento agregado más recientemente
 	 */
 	public T pop();	
+	
+	/**
+	 * metodo de comparacion (Comparable<T>) 
+	 *@return 1,0,-1 segun la relacion entre los elementos.
+	 */
+	public int compareTo(T pItem);
+	
 }
