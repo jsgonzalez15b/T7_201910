@@ -1,16 +1,16 @@
 package model.data_structures;
 import java.lang.*;
 /**
- *Heap de prioridad siempre ordenado de mayor a menor
+ *Heap de prioridad siempre ordenado de mayor a menor, mediante una implementación de una arreglo variable generica.
  */
 public class MaxHeapCP <T extends Comparable<T>>
 {
   //Atributos
 
 	/**
-	 * Nodo maximo de Heap, primer nodo
+	 * Lista generica
 	 */
-	public Nodo<T> maximo;
+	public ArregloDinamico<T> arreglo;
 	
 	/**
 	 * numero de elementos en Heap
@@ -26,7 +26,7 @@ public class MaxHeapCP <T extends Comparable<T>>
 	public MaxHeapCP ()
 	{
 		//Inicializa el maximo nodo como vacio, y la cantidad y altura como 0.
-		maximo= null;
+		arreglo= null;
 		altura = 0;
 		cantidad= 0;
 	}
@@ -38,7 +38,7 @@ public class MaxHeapCP <T extends Comparable<T>>
 	 */
 	public boolean isEmpty()
 	{
-		return maximo==null;
+		return arreglo==null;
 	}
 	
 	/**
@@ -46,7 +46,7 @@ public class MaxHeapCP <T extends Comparable<T>>
 	 */
 	public int recalcularAltura()
 	{
-		return (int) ((Math.log(num+1) / Math.log(2))-1);
+		return (int) ((Math.log(arreglo.length+1) / Math.log(2))-1);
 	}
 	
 	/**
@@ -55,15 +55,7 @@ public class MaxHeapCP <T extends Comparable<T>>
 	 */
 	public int size()
 	{
-		return cantidad;
-	}
-	
-	/**
-	 * 
-	 */
-	public void compareTo(T pElemento)
-	{
-	
+		return arreglo.length;
 	}
 	
 	/**
