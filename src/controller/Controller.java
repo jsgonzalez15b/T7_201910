@@ -55,10 +55,11 @@ public class Controller {
 		movingViolationsQueue=new Queue<VOMovingViolation>();
 		movingViolationsStack= new Stack<VOMovingViolation>();
 		int infracciones=0; 
-		String[] nombresArchivos=new String[3];
+		String[] nombresArchivos=new String[4];
 		nombresArchivos[0]="."+File.separator+"data"+File.separator+"Moving_Violations_Issued_in_January_2018.csv";
 		nombresArchivos[1]="."+File.separator+"data"+File.separator+"Moving_Violations_Issued_in_February_2018.csv";
 		nombresArchivos[2]="."+File.separator+"data"+File.separator+"Moving_Violations_Issued_in_March_2018.csv";
+		nombresArchivos[3]="."+File.separator+"data"+File.separator+"Moving_Violations_Issued_in_April_2018.csv";
 		CSVReader reader=null;
 		for(int i=0; i<nombresArchivos.length;i++){
 			try{
@@ -95,7 +96,7 @@ public class Controller {
 	 * @param n tamaNo de la muestra, n > 0
 	 * @return muestra generada
 	 */
-	public Comparable<VOMovingViolation> [ ] generarMuestra( int n )
+	public Comparable<VOMovingViolation>[ ] generarMuestra( int n )
 	{
 		int contador=1; 
 		muestra = new Comparable[n];
