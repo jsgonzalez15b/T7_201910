@@ -3,12 +3,15 @@ package controller;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.opencsv.CSVReader;
 
 import model.data_structures.*;
 import model.util.Sort;
+import model.vo.LocationVO;
 import model.vo.VOMovingViolation;
 import view.MovingViolationsManagerView;
 
@@ -68,8 +71,8 @@ public class Controller {
 				linea=reader.readNext();
 				while(linea!=null){
 					infracciones++;
-					movingViolationsStack.push(new VOMovingViolation(Integer.parseInt(linea[0]), linea[2], linea[13], Double.parseDouble(linea[9]), linea[12], linea[15], linea[14], Double.parseDouble(linea[8]) ));
-					movingViolationsQueue.enqueue(new VOMovingViolation(Integer.parseInt(linea[0]), linea[2], linea[13], Double.parseDouble(linea[9]), linea[12], linea[15], linea[14], Double.parseDouble(linea[8])));
+					movingViolationsStack.push(new VOMovingViolation(Integer.parseInt(linea[0]), linea[2], linea[13], Double.parseDouble(linea[9]), linea[12], linea[15], linea[14], Double.parseDouble(linea[8]), Integer.parseInt(linea[3]) ));
+					movingViolationsQueue.enqueue(new VOMovingViolation(Integer.parseInt(linea[0]), linea[2], linea[13], Double.parseDouble(linea[9]), linea[12], linea[15], linea[14], Double.parseDouble(linea[8]), Integer.parseInt(linea[3])));
 					linea=reader.readNext();
 				}
 			}catch(Exception e){
@@ -320,6 +323,51 @@ public class Controller {
 				break;
 			}
 		}
+	}
+	
+	
+	public 	MaxColaPrioridad<LocationVO> CrearMaxColaP (LocalDateTime fInicial, LocalDateTime fFinal){
+		MaxColaPrioridad<LocationVO> retornar= new MaxColaPrioridad<>();
+		int mesinicio=fInicial.getMonthValue();
+		int mesfin=fFinal.getMonthValue();
+		int diaInicio=fInicial.getDayOfMonth(); 
+		int diaFin=fFinal.getDayOfMonth();
+		ArrayList<Integer> agregadas= new ArrayList<>();
+		Iterador<VOMovingViolation> iter= (Iterador<VOMovingViolation>) movingViolationsStack.iterator();
+		VOMovingViolation actual= iter.next();
+		while (iter.hasNext()) {
+			int mesactual=Integer.parseInt(actual.getTicketIssueDate().split("T")[0].split("-")[1]);
+			int diaActual= Integer.parseInt(actual.getTicketIssueDate().split("T")[0].split("-")[2]);
+			if(mesactual>=mesinicio&&diaActual>=diaInicio&&mesactual<=mesfin&&diaActual<=diaFin) {
+				if(!verificar(agregadas,actual.getAdressId())) {
+					int id=actual.getAdressId();
+					String locacion=actual.getLocation();
+					Iterador<VOMovingViolation> iter2= (Iterador<VOMovingViolation>) movingViolationsStack.iterator();
+					VOMovingViolation actual2=iter.next(); 
+					int registros=0; 
+					while(iter2.hasNext()) {
+						if(actual2.getAdressId()==id) {
+							registros++; 
+						}
+					}
+				LocationVO agregar= new LocationVO(id, locacion, registros);
+				agregadas.add(id);
+				retornar.agregar(agregar);
+				}
+			}
+			actual=iter.next(); 
+		}
+		return retornar; 
+	}
+	
+	public boolean verificar(ArrayList<Integer> arreglo, int num) {
+		boolean retornar=false; 
+		for(int i=0; i<arreglo.size(); i++) {
+			if(arreglo.get(i)==num) {
+				retornar=true; 
+			}
+		}
+		return retornar; 
 	}
 
 }

@@ -38,8 +38,9 @@ public class VOMovingViolation implements Comparable<VOMovingViolation> {
 	 */
 	private double fineAMT;
 
+	private int adressId; 
 
-	public VOMovingViolation(int pId, String pLocation, String pTicketIssueDate, double pTotoalpaid, String pAccidentIndicator, String pDescription, String pViolationCode, double pfineAMT){
+	public VOMovingViolation(int pId, String pLocation, String pTicketIssueDate, double pTotoalpaid, String pAccidentIndicator, String pDescription, String pViolationCode, double pfineAMT, int pAdressId){
 		Id=pId;
 		location=pLocation;
 		ticketIssueDate=pTicketIssueDate;
@@ -48,6 +49,7 @@ public class VOMovingViolation implements Comparable<VOMovingViolation> {
 		description=pDescription; 		
 		violationcode=pViolationCode; 
 		fineAMT=pfineAMT;
+		adressId=pAdressId; 
 	}
 
 
@@ -136,6 +138,10 @@ public class VOMovingViolation implements Comparable<VOMovingViolation> {
 			}
 		}
 		return comparacion;
+	}
+	
+	public int getAdressId() {
+		return adressId; 
 	}
 
 	public String toString()
