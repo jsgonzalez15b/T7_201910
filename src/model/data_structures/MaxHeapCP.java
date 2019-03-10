@@ -1,4 +1,5 @@
 package model.data_structures;
+import java.lang.*;
 /**
  *Heap de prioridad siempre ordenado de mayor a menor
  */
@@ -16,7 +17,7 @@ public class MaxHeapCP <T extends Comparable<T>>
 	 */
 	public int cantidad;
 	
-  /**
+ 	/**
 	 * altura actual del Heap
 	 */
 	public int generacion;
@@ -29,5 +30,68 @@ public class MaxHeapCP <T extends Comparable<T>>
 		altura = 0;
 		cantidad= 0;
 	}
+	//Metodos del Heap
+
+	/**
+	 * Retorna true si Heap esta vacio
+	 * @return true si la Cola esta vacia, false de lo contrario
+	 */
+	public boolean isEmpty()
+	{
+		return maximo==null;
+	}
+	
+	/**
+	 * Recalcula la altura actual del Heap cada vez que el metodo sea llamado
+	 */
+	public int recalcularAltura()
+	{
+		return (int) ((Math.log(num+1) / Math.log(2))-1);
+	}
+	
+	/**
+	 * Retorna el numero de elementos contenidos
+	 * @return el numero de elemntos contenidos
+	 */
+	public int size()
+	{
+		return cantidad;
+	}
+	
+	/**
+	 * 
+	 */
+	public void compareTo(T pElemento)
+	{
+	
+	}
+	
+	/**
+	 * 
+	 */
+	public void swim(T pElemento)
+	{
+		
+		
+		cantidad++;
+		recalcularAltura();
+	}
+
+	/**
+	 * 
+	 */
+	public T sift()
+	{
+
+		
+		cantidad--;
+		recalcularAltura();
+
+	}
+
+	public Iterador<T> iterator() {
+		return new Iterador<T>(primero);
+	}
+
   
 }
