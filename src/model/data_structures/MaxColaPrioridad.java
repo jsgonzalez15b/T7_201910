@@ -1,6 +1,6 @@
 package model.data_structures;
 import static org.junit.Assert.*;
-public class MaxColaPrioridad <T extends Comparable<T>>{
+public class MaxColaPrioridad <T extends Comparable<T>> implements IMaxColaPrioridad<T>{
 
 	private int tamano;
 

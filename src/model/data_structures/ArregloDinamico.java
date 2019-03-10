@@ -9,7 +9,7 @@ import com.sun.org.apache.xerces.internal.dom.ElementNSImpl;
  * @author Fernando De la Rosa
  *
  */
-public class ArregloDinamico<T> implements IArregloDinamico {
+public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamico<T>  {
 		/**
 		 * Capacidad maxima del arreglo
 		 */
@@ -29,18 +29,18 @@ public class ArregloDinamico<T> implements IArregloDinamico {
          */
 		public ArregloDinamico( int max )
         {
-               elementos = new T[max];
+               elementos = (T[]) new Object[max];
                tamanoMax = max;
                tamanoAct = 0;
         }
         
-		public void agregar( String dato )
+		public void agregar( T dato )
         {
                if ( tamanoAct == tamanoMax )
                {  // caso de arreglo lleno (aumentar tamaNo)
                     tamanoMax = 2 * tamanoMax;
                     T [ ] copia = elementos;
-                    elementos = new T[tamanoMax];
+                    elementos = (T[])new Object[tamanoMax];
                     for ( int i = 0; i < tamanoAct; i++)
                     {
                      	 elementos[i] = copia[i];
@@ -101,4 +101,8 @@ public class ArregloDinamico<T> implements IArregloDinamico {
 			tamanoAct--;
 			return aEliminar;
 		}
+
+
+
+
 }
