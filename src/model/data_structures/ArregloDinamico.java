@@ -10,14 +10,19 @@ import com.sun.org.apache.xerces.internal.dom.ElementNSImpl;
  *
  */
 public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamico<T>  {
-		/**
-		 * Capacidad maxima del arreglo
-		 */
+	/**
+	 * Capacidad maxima del arreglo
+	 */
         private int tamanoMax;
-		/**
-		 * Numero de elementos en el arreglo (de forma compacta desde la posicion 0)
-		 */
+	/**
+	 * Numero de elementos en el arreglo (de forma compacta desde la posicion 0)
+	 */
         private int tamanoAct;
+	
+	/**
+	 * ultimo elemento de la lista
+	 */
+        private T ultimo;
         /**
          * Arreglo de elementos de tamaNo maximo
          */
@@ -32,6 +37,15 @@ public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamic
                elementos = (T[]) new Object[max];
                tamanoMax = max;
                tamanoAct = 0;
+	       ultimo = null;
+        }
+	
+	/**
+         * retorna el ultimo elemento del arreglo
+         */
+		public T darUltimo()
+        {
+               return ultimo;
         }
         
 		public void agregar( T dato )
@@ -48,6 +62,7 @@ public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamic
             	    System.out.println("Arreglo lleno: " + tamanoAct + " - Arreglo duplicado: " + tamanoMax);
                }	
                elementos[tamanoAct] = dato;
+	       ultimo = dato; //se actualiza el ultimo elemento
                tamanoAct++;
        }
 
@@ -99,6 +114,7 @@ public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamic
 				}
 			}
 			tamanoAct--;
+			ultimo= elementos[elementos.length-1]; //se actualiza el ultimo elemento
 			return aEliminar;
 		}
 
