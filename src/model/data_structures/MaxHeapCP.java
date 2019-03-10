@@ -26,7 +26,7 @@ public class MaxHeapCP <T extends Comparable<T>>
 	public MaxHeapCP ()
 	{
 		//Inicializa el maximo nodo como vacio, y la cantidad y altura como 0.
-		arreglo= new ArregloDinamico<>();
+		arreglo= new ArregloDinamico<T>();
 		altura = 0;
 		cantidad= 0;
 	}
@@ -46,13 +46,8 @@ public class MaxHeapCP <T extends Comparable<T>>
 	 */
 	public int recalcularAltura()
 	{
-<<<<<<< HEAD
-		altura = (int) ((Math.log(arreglo.darTamano()+1) / Math.log(2))-1);
-		return  altura;
-=======
 		altura = (int) ((Math.log(arreglo.length+1) / Math.log(2))-1);
 		return = altura;
->>>>>>> 731f33dc182360eeeb4ba3ba660159b7f0509c17
 	}
 	
 	/**
@@ -149,30 +144,18 @@ public class MaxHeapCP <T extends Comparable<T>>
 		int j= 0;
 		while(i>=0 && j>=0 && !terminamos)
 		{
-<<<<<<< HEAD
-			if(i%2==1)
-=======
 			if(i%2=1)
->>>>>>> 731f33dc182360eeeb4ba3ba660159b7f0509c17
 			{
 				j=(i-1)/2; //es el primer hijo
 			}
 			else
 			{
-<<<<<<< HEAD
-				j=(i-2)/2; //es el segundo hijo
-=======
 				j=(i-2)/2 //es el segundo hijo
->>>>>>> 731f33dc182360eeeb4ba3ba660159b7f0509c17
 			}
 			if(arreglo[i].compareTo(arreglo[j+1])>0)
 			{
 				//se intercambian los elementos y actualizan indices, primer hijo mayor a padre
-<<<<<<< HEAD
-				intercambio=(T)arreglo[i];
-=======
 				intercambio=arreglo[i];
->>>>>>> 731f33dc182360eeeb4ba3ba660159b7f0509c17
 				arreglo[i]=arreglo[j];
 				arreglo[j]=intercambio;
 				i=j;
@@ -190,3 +173,6 @@ public class MaxHeapCP <T extends Comparable<T>>
 	public Iterador<T> iterator() {
 		return new Iterador<T>(primero);
 	}
+
+  
+}
