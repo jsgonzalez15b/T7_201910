@@ -52,7 +52,7 @@ public class MaxHeapCP <T extends Comparable<T>>
 	
 	/**
 	 * Retorna el numero de elementos contenidos
-	 * @return el numero de elemntos contenidos
+	 * @return el numero de elementos contenidos
 	 */
 	public int size()
 	{
@@ -60,8 +60,7 @@ public class MaxHeapCP <T extends Comparable<T>>
 	}
 	
 	/**
-	 * Retorna el numero de elementos contenidos
-	 * @return el numero de elemntos contenidos
+	 *Agrega un elemento al final del Heap y lo ubica en la misma
 	 */
 	public void agregar(T pElemento)
 	{
@@ -75,8 +74,8 @@ public class MaxHeapCP <T extends Comparable<T>>
 	}
 	
 	/**
-	 * Retorna el numero de elementos contenidos
-	 * @return el numero de elemntos contenidos
+	 * Retorna el maximo elemento y lo elimina del Heao ordenando el arbol resultante
+	 * @return el elemento maximo
 	 */
 	public T delMax()
 	{
