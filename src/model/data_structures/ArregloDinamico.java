@@ -9,7 +9,7 @@ import com.sun.org.apache.xerces.internal.dom.ElementNSImpl;
  * @author Fernando De la Rosa
  *
  */
-public class ArregloDinamico implements IArregloDinamico {
+public class ArregloDinamico<T> implements IArregloDinamico {
 		/**
 		 * Capacidad maxima del arreglo
 		 */
@@ -21,7 +21,7 @@ public class ArregloDinamico implements IArregloDinamico {
         /**
          * Arreglo de elementos de tamaNo maximo
          */
-        private String elementos[ ];
+        private T elementos[ ];
 
         /**
          * Construir un arreglo con la capacidad maxima inicial.
@@ -29,7 +29,7 @@ public class ArregloDinamico implements IArregloDinamico {
          */
 		public ArregloDinamico( int max )
         {
-               elementos = new String[max];
+               elementos = new T[max];
                tamanoMax = max;
                tamanoAct = 0;
         }
@@ -39,8 +39,8 @@ public class ArregloDinamico implements IArregloDinamico {
                if ( tamanoAct == tamanoMax )
                {  // caso de arreglo lleno (aumentar tamaNo)
                     tamanoMax = 2 * tamanoMax;
-                    String [ ] copia = elementos;
-                    elementos = new String[tamanoMax];
+                    T [ ] copia = elementos;
+                    elementos = new T[tamanoMax];
                     for ( int i = 0; i < tamanoAct; i++)
                     {
                      	 elementos[i] = copia[i];
@@ -56,9 +56,9 @@ public class ArregloDinamico implements IArregloDinamico {
 			return tamanoAct;
 		}
 
-		public String darElemento(int i) {
+		public T darElemento(int i) {
 			// TODO implementar
-			String buscado=null;   
+			T buscado=null;   
 			for(int j=0; j<tamanoAct && buscado==null;j++) {
 				if(j==i) {
 					buscado=elementos[j];
@@ -67,12 +67,12 @@ public class ArregloDinamico implements IArregloDinamico {
 			return buscado;
 		}
 
-		public String buscar(String dato) {
+		public T buscar(T dato) {
 			// TODO implementar
 			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
 			int inicio=0;
 			int fin=elementos.length-1;
-			String buscado=null; 
+			T buscado=null; 
 			while (inicio<=fin && buscado==null) {
 				int mitad=(inicio+fin)/2;
 				if(dato.compareTo(elementos[mitad])==0){
@@ -86,10 +86,10 @@ public class ArregloDinamico implements IArregloDinamico {
 			return buscado; 
 		}
 
-		public String eliminar(String dato) {
+		public T eliminar(T dato) {
 			// TODO implementar
 			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
-			String aEliminar=null;
+			T aEliminar=null;
 			for (int i=0; i<elementos.length; i++) {
 				if(elementos[i].compareTo(dato)==0) {
 					aEliminar=elementos[i];
