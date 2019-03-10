@@ -8,17 +8,17 @@ public class MaxHeapCP <T extends Comparable<T>>
   //Atributos
 
 	/**
-	 * Lista generica
+	 * Lista generica.
 	 */
 	public ArregloDinamico<T> arreglo;
 	
 	/**
-	 * numero de elementos en Heap
+	 * numero de elementos en Heap, NO TAMANO DEL ARREGLO.
 	 */
 	public int cantidad;
 	
  	/**
-	 * altura actual del Heap
+	 * altura actual del Heap.
 	 */
 	public int altura;
   
@@ -34,7 +34,7 @@ public class MaxHeapCP <T extends Comparable<T>>
 
 	/**
 	 * Retorna true si Heap esta vacio
-	 * @return true si la Heap esta vacio, false de lo contrario
+	 * @return true si Heap esta vacio, false de lo contrario
 	 */
 	public boolean isEmpty()
 	{
@@ -56,7 +56,7 @@ public class MaxHeapCP <T extends Comparable<T>>
 	 */
 	public int size()
 	{
-		return arreglo.length;
+		return arreglo.darTamano();
 	}
 	
 	/**
@@ -70,7 +70,7 @@ public class MaxHeapCP <T extends Comparable<T>>
 		//este elemento es elevado hasta su posicion correcta
 		float(pElemento);
 		//se actualiza la cantidad de elementos en el arbol y su altura
-		cantidad=arreglo.length;
+		cantidad=arreglo.darTamano();
 		recalcularAltura();
 	}
 	
@@ -89,7 +89,7 @@ public class MaxHeapCP <T extends Comparable<T>>
 		
 		swim(); //el primer (antiguo menor) elemento es hundido hasta su nueva posicion
 		//se actualiza la cantidad de elementos en el arbol y su altura
-		cantidad=arreglo.length;
+		cantidad=arreglo.darTamano();
 		recalcularAltura();
 		
 		return maximoEliminado; //se retorna el elemento eliminado de la lista
@@ -141,7 +141,7 @@ public class MaxHeapCP <T extends Comparable<T>>
 	{
 		boolean terminamos=false; //no se ha elevado mas el ultimo elemento
 		T intercambio =null;
-		int i= arreglo.length-1;
+		int i= arreglo.darTamano()-1;
 		int j= 0;
 		while(i>=0 && j>=0 && !terminamos)
 		{
