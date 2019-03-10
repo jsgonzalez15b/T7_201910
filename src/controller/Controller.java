@@ -106,11 +106,32 @@ public class Controller {
 			System.out.println(contador+"");
 			contador++; 
 		}
-
 		// TODO Llenar la muestra aleatoria con los datos guardados en la estructura de datos
-
+		MaxColaPrioridad<VOMovingViolation> cola=new MaxColaPrioridad<>();
+		long starTime=System.currentTimeMillis();
+		for(int i=0; i<muestra.length; i++) {
+			cola.agregar((VOMovingViolation) muestra[i]);
+		}
+		long enTime=System.currentTimeMillis()-starTime; 
 		return muestra;
-
+	}
+	
+	public void darTiempoAgregarMaxCola( int N) {
+		MaxColaPrioridad<VOMovingViolation> cola=new MaxColaPrioridad<>();
+		Iterador<VOMovingViolation> iter=(Iterador<VOMovingViolation>) movingViolationsStack.iterator();
+		VOMovingViolation actual=iter.next();
+		long starTime=System.currentTimeMillis();
+		for(int i=0; i<N&&iter.hasNext(); i++) {
+			cola.agregar(actual);
+			actual=iter.next();
+		}
+		long enTime=System.currentTimeMillis()-starTime;
+		System.out.println(enTime+" milisegundos");
+		
+		long starTime2=System.currentTimeMillis(); 
+		cola.delMax(); 
+		long endTime2=System.currentTimeMillis()-starTime; 
+		System.out.println(endTime2 +"milisegundos delmax");
 	}
 
 	/**
@@ -219,20 +240,9 @@ public class Controller {
 
 			case 4:
 				// Aplicar ShellSort a una copia de la muestra
-				if ( nMuestra > 0 && muestra != null && muestra.length == nMuestra )
-				{
-					muestraCopia = this.obtenerCopia(muestra);
-					startTime = System.currentTimeMillis();
-					this.ordenarShellSort(muestraCopia);
-					endTime = System.currentTimeMillis();
-					duration = endTime - startTime;
-					view.printMensage("Ordenamiento generado en una copia de la muestra");
-					view.printMensage("Tiempo de ordenamiento ShellSort: " + duration + " milisegundos");
-				}
-				else
-				{
-					view.printMensage("Muestra invalida");
-				}
+				view.printMensage("Ingrese tamaño a probar");
+				int datos=sc.nextInt(); 
+				darTiempoAgregarMaxCola(datos);
 				break;
 
 			case 5:

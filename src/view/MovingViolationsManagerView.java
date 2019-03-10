@@ -12,7 +12,7 @@ public class MovingViolationsManagerView
 		System.out.println("1. Cargar datos de infracciones en movimiento");
 		System.out.println("2. Obtener una muestra de datos a ordenar");
 		System.out.println("3. Mostrar la muestra de datos a ordenar");
-		System.out.println("4. Ordenar datos de la muestra por Shellsort (ordenamiento de una copia de la muestra)");
+		System.out.println("4. Tiempo en  Maxcolaprioridad");
 		System.out.println("5. Ordenar datos de la muestra por Mergesort (ordenamiento de una copia de la muestra)");
 		System.out.println("6. Ordenar datos de la muestra por Quicksort (ordenamiento de una copia de la muestra)");
 		System.out.println("7. Mostrar la muestra ordenada (muestra copia)");
