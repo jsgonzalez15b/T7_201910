@@ -34,7 +34,7 @@ public class MaxHeapCP <T extends Comparable<T>>
 
 	/**
 	 * Retorna true si Heap esta vacio
-	 * @return true si la Cola esta vacia, false de lo contrario
+	 * @return true si la Heap esta vacio, false de lo contrario
 	 */
 	public boolean isEmpty()
 	{
@@ -59,25 +59,53 @@ public class MaxHeapCP <T extends Comparable<T>>
 	}
 	
 	/**
+	 * Retorna el numero de elementos contenidos
+	 * @return el numero de elemntos contenidos
+	 */
+	public void agregar(T pElemento)
+	{
+		//se agrega el elemento al final del arreglo dinamico
+		arreglo.agregar(pElemento);
+		//este elemento es elevado hasta su posicion correcta
+		float(pElemento);
+		//se actualiza la cantidad de elementos en el arbol y su altura
+		cantidad++;
+		recalcularAltura();
+	}
+	
+	/**
+	 * Retorna el numero de elementos contenidos
+	 * @return el numero de elemntos contenidos
+	 */
+	public T delMax()
+	{
+		arreglo.cambiarMaxMin()//se intercambian primer y segundo termino
+		swim(pElemento); //el antiguo menor elemento es hasta su nueva posicion
+		//se actualiza la cantidad de elementos en el arbol y su altura
+		cantidad--;
+		recalcularAltura();
+		
+		return pElemento; //se retorna el elemento eliminado de la lista
+	}
+	
+	/**
 	 * 
 	 */
 	public void swim(T pElemento)
 	{
 		
 		
-		cantidad++;
-		recalcularAltura();
+		
 	}
 
 	/**
 	 * 
 	 */
-	public T sift()
+	public T float()
 	{
 
 		
-		cantidad--;
-		recalcularAltura();
+		
 
 	}
 
