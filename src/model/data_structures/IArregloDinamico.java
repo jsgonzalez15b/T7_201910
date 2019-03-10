@@ -4,9 +4,16 @@ public interface IArregloDinamico<T extends Comparable<T>> {
 
 	/**
 	 * Retornar el numero de elementos en el arreglo
-	 * @return
+	 * @return tamano del arreglo
 	 */
 	int darTamano( );
+	
+	/**
+         * retorna el ultimo elemento del arreglo
+	 * @return ultimo elemento del arreglo
+         */
+	T darUltimo();
+	
 	
 	/**
 	 * Retornar el elemento en la posicion i
