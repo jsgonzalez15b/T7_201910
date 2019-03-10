@@ -87,7 +87,7 @@ public class MaxHeapCP <T extends Comparable<T>>
 		maximoEliminado = arreglo.eliminar(primeroProvisional);
 		
 		
-		swim(); //el antiguo menor elemento es hundido hasta su nueva posicion
+		swim(); //el primer (antiguo menor) elemento es hundido hasta su nueva posicion
 		//se actualiza la cantidad de elementos en el arbol y su altura
 		cantidad=arreglo.length;
 		recalcularAltura();
@@ -96,21 +96,76 @@ public class MaxHeapCP <T extends Comparable<T>>
 	}
 	
 	/**
-	 * 
+	 * Se hunde el primer termino en el Heap hasta la posicion adecuada
 	 */
-	public void swim(T pElemento)
+	public void swim()
 	{
+		boolean terminamos=false; //no se ha hundido mas el primer elemento
+		T intercambio =null;
+		int i= 0;
+		int j =2*i;
+		while(i<cantidad && j<cantidad && !terminamos)
+		{
+			if(arreglo[i].compareTo(arreglo[j+1])<0)
+			{
+				//se intercambian los elementos y actualizan indices, primer hijo
+				intercambio=arreglo[i];
+				arreglo[i]=arreglo[j+1];
+				arreglo[j+1]=intercambio;
+				i=j+1;
+				j=2*i;
+			}
+			else if(arreglo[i].compareTo(arreglo[j+1])<0)
+			{
+				//se intercambian los elementos y actualizan indices, segundo hijo
+				intercambio=arreglo[i];
+				arreglo[i]=arreglo[j+2];
+				arreglo[j+2]=intercambio;
+				i=j+2;
+				j=2*i;
+			}
+			else
+			{
+				terminamos=true; //no hubo intercambio entre los hijos
+			}
+		}
 		
 		
 		
 	}
 
 	/**
-	 * 
+	 * Se eleva el ultimo termino en el Heap hasta la posicion adecuada
 	 */
 	public void float()
 	{
-
+		boolean terminamos=false; //no se ha elevado mas el ultimo elemento
+		T intercambio =null;
+		int i= arreglo.length-1;
+		int j= 0;
+		while(i>=0 && j>=0 && !terminamos)
+		{
+			if(i%2=1)
+			{
+				j=(i-1)/2; //es el primer hijo
+			}
+			else
+			{
+				j=(i-2)/2 //es el segundo hijo
+			}
+			if(arreglo[i].compareTo(arreglo[j+1])>0)
+			{
+				//se intercambian los elementos y actualizan indices, primer hijo mayor a padre
+				intercambio=arreglo[i];
+				arreglo[i]=arreglo[j];
+				arreglo[j]=intercambio;
+				i=j;
+			}
+			else
+			{
+				terminamos=true; //no hubo intercambio entre los hijos
+			}
+		}
 		
 		
 
