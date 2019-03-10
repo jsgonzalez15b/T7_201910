@@ -20,13 +20,13 @@ public class MaxHeapCP <T extends Comparable<T>>
  	/**
 	 * altura actual del Heap
 	 */
-	public int generacion;
+	public int altura;
   
 	//Metodo Constructor
 	public MaxHeapCP ()
 	{
 		//Inicializa el maximo nodo como vacio, y la cantidad y altura como 0.
-		arreglo= null;
+		arreglo= new ArregloDinamico<T>();
 		altura = 0;
 		cantidad= 0;
 	}
@@ -46,7 +46,8 @@ public class MaxHeapCP <T extends Comparable<T>>
 	 */
 	public int recalcularAltura()
 	{
-		return (int) ((Math.log(arreglo.length+1) / Math.log(2))-1);
+		altura = (int) ((Math.log(arreglo.length+1) / Math.log(2))-1);
+		return = altura;
 	}
 	
 	/**
@@ -69,7 +70,7 @@ public class MaxHeapCP <T extends Comparable<T>>
 		//este elemento es elevado hasta su posicion correcta
 		float(pElemento);
 		//se actualiza la cantidad de elementos en el arbol y su altura
-		cantidad++;
+		cantidad=arreglo.length;
 		recalcularAltura();
 	}
 	
@@ -79,13 +80,19 @@ public class MaxHeapCP <T extends Comparable<T>>
 	 */
 	public T delMax()
 	{
-		arreglo.cambiarMaxMin()//se intercambian primer y segundo termino
-		swim(pElemento); //el antiguo menor elemento es hasta su nueva posicion
+		//se cambia el primer por el ultimo termino y se elimina la ultima posicion
+		T primeroProvisional= arreglo[0];
+		arreglo[0]= arreglo.darUltimo();
+		arreglo[arreglo.darTamano()]= primeroProvisional;
+		maximoEliminado = arreglo.eliminar(primeroProvisional);
+		
+		
+		swim(); //el antiguo menor elemento es hundido hasta su nueva posicion
 		//se actualiza la cantidad de elementos en el arbol y su altura
-		cantidad--;
+		cantidad=arreglo.length;
 		recalcularAltura();
 		
-		return pElemento; //se retorna el elemento eliminado de la lista
+		return maximoEliminado; //se retorna el elemento eliminado de la lista
 	}
 	
 	/**
@@ -101,7 +108,7 @@ public class MaxHeapCP <T extends Comparable<T>>
 	/**
 	 * 
 	 */
-	public T float()
+	public void float()
 	{
 
 		
