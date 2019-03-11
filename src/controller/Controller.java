@@ -69,10 +69,11 @@ public class Controller {
 				reader=new CSVReader(new FileReader(nombresArchivos[i]));
 				String[] linea=reader.readNext();
 				linea=reader.readNext();
+				int adress=linea[3].equals("")?0: Integer.parseInt(linea[3]);
 				while(linea!=null){
 					infracciones++;
-					movingViolationsStack.push(new VOMovingViolation(Integer.parseInt(linea[0]), linea[2], linea[13], Double.parseDouble(linea[9]), linea[12], linea[15], linea[14], Double.parseDouble(linea[8]), Integer.parseInt(linea[3]) ));
-					movingViolationsQueue.enqueue(new VOMovingViolation(Integer.parseInt(linea[0]), linea[2], linea[13], Double.parseDouble(linea[9]), linea[12], linea[15], linea[14], Double.parseDouble(linea[8]), Integer.parseInt(linea[3])));
+					movingViolationsStack.push(new VOMovingViolation(Integer.parseInt(linea[0]), linea[2], linea[13], Double.parseDouble(linea[9]), linea[12], linea[15], linea[14], Double.parseDouble(linea[8]), adress ));
+					movingViolationsQueue.enqueue(new VOMovingViolation(Integer.parseInt(linea[0]), linea[2], linea[13], Double.parseDouble(linea[9]), linea[12], linea[15], linea[14], Double.parseDouble(linea[8]), adress));
 					linea=reader.readNext();
 				}
 			}catch(Exception e){
@@ -250,21 +251,10 @@ public class Controller {
 
 			case 5:
 				// Aplicar MergeSort a una copia de la muestra
-				if ( nMuestra > 0 && muestra != null && muestra.length == nMuestra )
-				{
-					muestraCopia = this.obtenerCopia(muestra);
-					startTime = System.currentTimeMillis();
-					this.ordenarMergeSort(muestraCopia);
-					endTime = System.currentTimeMillis();
-					duration = endTime - startTime;
-					view.printMensage("Ordenamiento generado en una copia de la muestra");
-					view.printMensage("Tiempo de ordenamiento MergeSort: " + duration + " milisegundos");
-				}
-				else
-				{
-					view.printMensage("Muestra invalida");
-				}
-				break;
+				view.printMensage("Ingrese tamaño a probar");
+				int datos2=sc.nextInt();
+				darTiempodelMax(datos2); 
+				break; 
 
 			case 6:
 				// Aplicar QuickSort a una copia de la muestra
@@ -326,6 +316,23 @@ public class Controller {
 	}
 	
 	
+	private void darTiempodelMax(int datos2) {
+		
+		MaxColaPrioridad<VOMovingViolation> cola=new MaxColaPrioridad<>();
+		Iterador<VOMovingViolation> iter=(Iterador<VOMovingViolation>) movingViolationsStack.iterator();
+		VOMovingViolation actual=iter.next();
+		for(int i=0; i<datos2&&iter.hasNext(); i++) {
+			cola.agregar(actual);
+			actual=iter.next();
+		}
+		
+		long starTime2=System.currentTimeMillis(); 
+		cola.delMax(); 
+		long endTime2=System.currentTimeMillis()-starTime2; 
+		System.out.println(endTime2 +"milisegundos delmax");
+		
+	}
+
 	public 	MaxColaPrioridad<LocationVO> CrearMaxColaP (LocalDateTime fInicial, LocalDateTime fFinal){
 		MaxColaPrioridad<LocationVO> retornar= new MaxColaPrioridad<>();
 		int mesinicio=fInicial.getMonthValue();
