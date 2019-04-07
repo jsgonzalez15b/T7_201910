@@ -3,7 +3,7 @@ package model.data_structures;
 /** Clase que permite el almacenamiento de objetos genéricos en colas y filas
  *  Implementa los métodos necesarios para ambas estructuras de datos ()
  */
-public class Nodo<T> 
+public class Nodo<k extends Comparable<k>,T>
 {
 	//Atributos
 
@@ -15,20 +15,26 @@ public class Nodo<T>
 	/**
 	 * Relación de cola/pila en lista simplemente encadenada
 	 */
-	private Nodo<T> siguiente;
+	private Nodo<k,T> izquierdo;
 	
 	/**
 	 * Relación de cola/pila en lista doblemente encadenada
 	 */
-	private Nodo<T> anterior;
+	private Nodo<k,T> derecho;
 	
+	private k llave; 
+	private boolean rojo; 
+	
+	private boolean negro; 
 	//Método Constructor
-	public Nodo (T pElemento)
+	public Nodo (k pllave, T pElemento)
 	{
-		//Para construir un nodo es necesario conocer el elemento de entrada, si es primero o ultimo.
-		elemento= pElemento;
-		siguiente = null; //El nodo siguiente no es contruido pero debe ser inmediatamente asignado
-		anterior = null; //El nodo siguiente no es contruido pero debe ser inmediatamente asignado
+		izquierdo=null; 
+		derecho=null; 
+		rojo=true; 
+		negro=false; 
+		elemento=pElemento;
+		llave=pllave; 
 	}
 
 	//Métodos del nodo
@@ -36,17 +42,17 @@ public class Nodo<T>
 	/**
 	 * método encargado de reasignar el nodo siguiente. 
 	 */
-	public void setSiguiente(Nodo<T> nuevoSiguiente)
+	public void setIzquierdo(Nodo<k,T> pIzquierdo)
 	{
-		siguiente =nuevoSiguiente;
+		izquierdo =pIzquierdo;
 	}
 	
 	/**
 	 * método encargado de reasignar el nodo siguiente. 
 	 */
-	public void setAnterior(Nodo<T> nuevoAnterior)
+	public void setDerecho(Nodo<k,T> pDerecho)
 	{
-		anterior =nuevoAnterior;
+		derecho=pDerecho;
 	}
 	
 	/**
@@ -60,19 +66,100 @@ public class Nodo<T>
 	/**
 	 * método que retorna el siguiente nodo. 
 	 */
-	public Nodo<T> darSiguiente()
+	public Nodo<k,T> darIzquierdo()
 	{
-		return siguiente;
+		return izquierdo; 
 	}
 	
 	/**
 	 * método que retorna el nodo anterior. 
 	 */
-	public Nodo<T> darAnterior()
+	public Nodo<k,T> darDerecho()
 	{
-		return anterior;
+		return derecho;
 	}
 	
+	public void setRojo(boolean p) {
+		rojo=p; 
+	}
+	public void seNegro(boolean p) {
+		negro=p; 
+	}
+	
+	public k darLlave() {
+		return llave; 
+	}
+	
+	public boolean esHoja() {
+		return (izquierdo==null&&derecho==null)?true:false;
+	}
+
+	public int Height() {
+		if(esHoja()) {
+			return 1; 
+		}else {
+			int alturaizq=0; 
+			int alturader=0; 
+			if(izquierdo!=null) {
+				alturaizq=izquierdo.Height(); 
+			}
+			if(derecho!=null) {
+				alturader=derecho.Height(); 
+			}
+			if(alturaizq>alturader) {
+				return 1+alturaizq; 
+			}else {
+				return 1+alturader; 
+			}
+		}
+	}
+
+	public T get(k key) {
+		T buscado=null; 
+		if(key.compareTo(this.llave)<0&&izquierdo!=null){
+			buscado=izquierdo.get(key); 
+		}
+		else if(key.compareTo(this.llave)>0 && derecho!=null) {
+			buscado= derecho.get(key);
+		}else if(key.compareTo(this.llave)==0){
+			buscado=this.darElemento();  
+		}
+		return buscado; 
+	}
+	
+	public int getHeight(k key) {
+		if(llave.compareTo(key)==0) {
+			return 1; 
+		}else {
+			int alturaizq=0; 
+			int alturader=0; 
+			if(izquierdo!=null) {
+				alturaizq=izquierdo.Height(); 
+			}
+			if(derecho!=null) {
+				alturader=derecho.Height(); 
+			}
+			if(alturaizq>alturader) {
+				return 1+alturaizq; 
+			}else {
+				return 1+alturader; 
+			}
+		}
+	}
+	
+	public boolean contains(k key) {
+		boolean esta=false; 
+		if(key.compareTo(this.llave)<0&&izquierdo!=null) {
+			esta=izquierdo.contains(key); 
+		}
+		else if(key.compareTo(this.llave)>0&&derecho!=null) {
+			esta=derecho.contains(key); 
+		}
+		else if(key.compareTo(this.llave)==0) {
+			esta=true; 
+		}
+		return esta; 
+	}
 }
 
 	
