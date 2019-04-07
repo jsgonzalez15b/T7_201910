@@ -1,7 +1,13 @@
 package model.data_structures;
 
+import model.data_structures.Nodo.Color;
+
 public class RedBlackBST <k extends Comparable<k>,T>{
 
+//	public enum Color{
+//		ROJO,
+//		NEGRO
+//	}
 	private Nodo<k,T> raiz; 
 	
 	private int elementos;
@@ -31,7 +37,7 @@ public class RedBlackBST <k extends Comparable<k>,T>{
 		if(isEmpty()||!contains(key)) {
 			return -1; 
 		}else {
-			return raiz.getHeight();
+			return raiz.getHeight(key);
 		}
 	}
 	
@@ -49,6 +55,32 @@ public class RedBlackBST <k extends Comparable<k>,T>{
 		}
 		else {
 			return false; 
+		}
+	}
+	
+	public k min() {
+		if(isEmpty()) {
+			return null; 
+		}else {
+			return raiz.min(); 
+		}
+	}
+	
+	public k max() {
+		if(isEmpty()) {
+			return null; 
+		}else {
+			return raiz.max(); 
+		}
+	}
+	
+	public void put(k key, T val) throws Exception { 
+		if(isEmpty()) {
+			Nodo<k,T> agregar= new Nodo<>(key, val,Color.NEGRO);
+			raiz=agregar;
+	
+		}else {
+			raiz.put(key, val);
 		}
 	}
 }
