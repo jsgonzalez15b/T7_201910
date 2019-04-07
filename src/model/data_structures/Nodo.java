@@ -253,9 +253,11 @@ public class Nodo<k extends Comparable<k>,T>
 	public void rotarIzquierda() {
 		Nodo<k,T> padresum=padre.darPadre();
 		padresum.setIzquierdo(this);
-		this.setPadre(padresum);
 		this.setIzquierdo(padre);
 		padre.setPadre(this);
+		this.setPadre(padresum);
+		this.setColor(Color.NEGRO);
+		this.darIzquierdo().setColor(Color.ROJO);
 	}
 
 
