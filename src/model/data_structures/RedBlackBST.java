@@ -83,4 +83,17 @@ public class RedBlackBST <k extends Comparable<k>,T>{
 			raiz.put(key, val);
 		}
 	}
+	
+	public Iterator<k> keys(){
+	
+	}
+	
+	public Iterator<V> valuesInRange(k init, k end){
+	
+	}
+	
+	public Iterator<k> keysInRange (k init, k end){
+	
+	}
+	
 }
